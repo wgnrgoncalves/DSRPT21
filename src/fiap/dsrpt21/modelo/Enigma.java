@@ -6,12 +6,11 @@ public class Enigma {
 	private int id_enigma;
 	private String nm_enigima;
 	private String descricao;
-	private Historia historia;
 	private int ordem;
 	private Enigma anterior;
 	private Enigma proximo;
 	private List<Pista> pistas;
-	private List<Solucao> solucao;
+	private Solucao solucao;
 	private Dificuldade dificuldade;
 	private List<Imagem> imagens;
 	public int getId_enigma() {
@@ -31,12 +30,6 @@ public class Enigma {
 	}
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}
-	public Historia getHistoria() {
-		return historia;
-	}
-	public void setHistoria(Historia historia) {
-		this.historia = historia;
 	}
 	public int getOrdem() {
 		return ordem;
@@ -62,10 +55,10 @@ public class Enigma {
 	public void setPistas(List<Pista> pistas) {
 		this.pistas = pistas;
 	}
-	public List<Solucao> getSolucao() {
+	public Solucao getSolucao() {
 		return solucao;
 	}
-	public void setSolucao(List<Solucao> solucao) {
+	public void setSolucao(Solucao solucao) {
 		this.solucao = solucao;
 	}
 	public Dificuldade getDificuldade() {

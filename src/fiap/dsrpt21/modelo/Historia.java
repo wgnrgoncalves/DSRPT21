@@ -8,7 +8,6 @@ public class Historia {
 	private String enredo;
 	private Usuario criador;
 	private List<Enigma> enigmas;
-	private List<Imagem> imagens;
 	public int getId_historia() {
 		return id_historia;
 	}
@@ -38,12 +37,6 @@ public class Historia {
 	}
 	public void setEnigmas(List<Enigma> enigmas) {
 		this.enigmas = enigmas;
-	}
-	public List<Imagem> getImagens() {
-		return imagens;
-	}
-	public void setImagens(List<Imagem> imagens) {
-		this.imagens = imagens;
 	}
 	
 

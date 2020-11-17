@@ -7,8 +7,6 @@ public class Solucao {
 	private String descricao;
 	private String resposta;
 	private TipoSolucao tipo_solucao;
-	private Enigma proximo;
-	private Enigma enigma;
 	public int getId_solucao() {
 		return id_solucao;
 	}
@@ -39,20 +37,7 @@ public class Solucao {
 	public void setTipo_solucao(TipoSolucao tipo_solucao) {
 		this.tipo_solucao = tipo_solucao;
 	}
-	public Enigma getProximo() {
-		return proximo;
-	}
-	public void setProximo(Enigma proximo) {
-		this.proximo = proximo;
-	}
-	public Enigma getEnigma() {
-		return enigma;
-	}
-	public void setEnigma(Enigma enigma) {
-		this.enigma = enigma;
-	}
-	
-	
+
 
 	
 	

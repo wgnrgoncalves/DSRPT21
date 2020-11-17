@@ -8,7 +8,6 @@ public class Fase_Jogo {
 	private LocalDateTime dt_fim;
 	private Jogo jogo;
 	private Enigma fase;
-	private Solucao solucao;
 	
 	public int getId_fase_jogo() {
 		return id_fase_jogo;
@@ -40,13 +39,6 @@ public class Fase_Jogo {
 	public void setFase(Enigma fase) {
 		this.fase = fase;
 	}
-	public Solucao getSolucao() {
-		return solucao;
-	}
-	public void setSolucao(Solucao solucao) {
-		this.solucao = solucao;
-	}
-	
 	
 	
 

@@ -1,11 +1,16 @@
 package fiap.dsrpt21.modelo;
 
+import java.time.LocalDate;
+
 public class Usuario {
 	
 	private int id_usuario;
 	private String nm_usuario;
 	private String login;
 	private String senha;
+	private String sexo;
+	private LocalDate dt_nascimento;
+	
 	private TipoUsuario tp_usuario;
 	
 	public int getId_usuario() {
@@ -37,6 +42,19 @@ public class Usuario {
 	}
 	public void setTp_usuario(TipoUsuario tp_usuario) {
 		this.tp_usuario = tp_usuario;
+	}
+	
+	public String getSexo() {
+		return sexo;
+	}
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
+	}
+	public LocalDate getDt_nascimento() {
+		return dt_nascimento;
+	}
+	public void setDt_nascimento(LocalDate dt_nascimento) {
+		this.dt_nascimento = dt_nascimento;
 	}
 	
 	

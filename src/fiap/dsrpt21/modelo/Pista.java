@@ -5,8 +5,8 @@ import java.util.List;
 public class Pista {
 	private int id_pista;
 	private String nm_pista;
-	private String desc_pista;
-	private int agrupamento;
+	private String pista;
+	private int ordem;
 	private Local local_inicio;
 	private Local local_destino;
 	private List<Imagem> imagens;
@@ -22,17 +22,17 @@ public class Pista {
 	public void setNm_pista(String nm_pista) {
 		this.nm_pista = nm_pista;
 	}
-	public String getDesc_pista() {
-		return desc_pista;
+	public String getPista() {
+		return pista;
 	}
-	public void setDesc_pista(String desc_pista) {
-		this.desc_pista = desc_pista;
+	public void setPista(String desc_pista) {
+		this.pista = desc_pista;
 	}
-	public int getAgrupamento() {
-		return agrupamento;
+	public int getOrdem() {
+		return ordem;
 	}
-	public void setAgrupamento(int agrupamento) {
-		this.agrupamento = agrupamento;
+	public void setOrdem(int agrupamento) {
+		this.ordem = agrupamento;
 	}
 	public Local getLocal_inicio() {
 		return local_inicio;
