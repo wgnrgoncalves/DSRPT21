@@ -8,20 +8,10 @@
     <ul class="navbar-nav mr-auto" style="width: 100%;">
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
-          Pistas
+          Clientes
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="PacienteController">Incluir</a>
-          <a class="dropdown-item" href="PacienteConsultaController">Consultar</a>
-        </div>
-      </li>
-       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
-          Enigmas
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="PacienteController">Incluir</a>
-          <a class="dropdown-item" href="PacienteConsultaController">Consultar</a>
+          <a class="dropdown-item" href="ClienteController">Incluir</a>
         </div>
       </li>
       <li class="nav-item" style="margin-left: auto !important;">

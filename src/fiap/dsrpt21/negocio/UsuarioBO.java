@@ -3,21 +3,17 @@ package fiap.dsrpt21.negocio;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.sql.*;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.*;
 
 //import org.apache.jasper.tagplugins.jstl.core.Set;
 
-import fiap.dsrpt21.dao.ConectionFactory;
-import fiap.dsrpt21.dao.Dao;
-import fiap.dsrpt21.dao.UsuarioDao;
+import fiap.dsrpt21.dao.*;
+import fiap.dsrpt21.modelo.TipoUsuario;
 import fiap.dsrpt21.modelo.Usuario;
-import fiap.dsrpt21.dao.ExceptionDao;
 //import fiap.nac2.dao.FuncionarioDao;
 //import fiap.nac2.modelo.Funcionario;
 
@@ -62,13 +58,11 @@ public class UsuarioBO {
     }
 
 
-    public boolean login(String login, String senha) throws Exception{
-        boolean permission = false;
-
-        if(login == null) {
+    public Usuario login(String login, String senha) throws Exception {
+        if (login == null) {
             throw new ExceptionDao("Login vazio");
         }
-        if(senha == null) {
+        if (senha == null) {
             throw new ExceptionDao("Senha vazia");
         }
         Usuario user = new Usuario();
@@ -76,7 +70,7 @@ public class UsuarioBO {
         user.setSenha(senha);
 
 
-        String sql = "select id_usuario, nm_usuario, login, senha, id_tipo_usuario, sexo, dt_nascimento from usuario where login = ? and senha = ? ";
+        String sql = "select * from usuario inner join tipo_usuario on usuario.id_tipo_usuario = tipo_usuario.id_tipo_usuario where login = ? and senha = ? ";
         try (Connection con = new ConectionFactory().getConexao();
              PreparedStatement pstmt = con.prepareStatement(sql)) {
 
@@ -85,17 +79,62 @@ public class UsuarioBO {
 
             ResultSet rs = pstmt.executeQuery();
 
-
             if (rs.next()) {
-                permission = true;
+                user.setId_usuario(rs.getInt(1));
+                user.setNm_usuario(rs.getString(2));
+                user.setTp_usuario(TipoUsuario.valueOf(rs.getString("NM_TIPO_USUARIO")));
+                user.setLogin(rs.getString(3));
+                user.setSenha(rs.getString(4));
             }
 
-            return permission;
+            return user;
         } catch (Exception e) {
             e.printStackTrace();
             throw e;
         }
     }
+
+    public void incluir(Usuario u) throws Exception {
+
+        String sql = "INSERT INTO USUARIO(NM_USUARIO, LOGIN, SENHA, ID_TIPO_USUARIO, SEXO, DT_NASCIMENTO)"
+                + " VALUES(?, ?, ?, ?, ?, ?)";
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        try {
+            con = new ConectionFactory().getConexao();
+            pstmt = con.prepareStatement(sql, new String[]{"ID_USUARIO"});
+
+            long tipoUsuario = 0;
+
+            if (u.getTp_usuario() == TipoUsuario.ADMINISTRADOR) {
+                tipoUsuario = 1;
+            }else {
+                tipoUsuario = 2;
+            }
+
+            pstmt.setString(1, u.getNm_usuario());
+            pstmt.setString(2, u.getLogin());
+            pstmt.setString(3, u.getSenha());
+            pstmt.setLong(4, tipoUsuario);
+            pstmt.setString(5, String.valueOf(u.getSexo()));
+            pstmt.setDate(6, UtilBanco.converte(u.getDt_nascimento()));
+
+            pstmt.executeUpdate();
+
+            ResultSet rs = pstmt.getGeneratedKeys();
+            if (rs.next()) {
+                long id = rs.getBigDecimal(1).longValue();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;  //propaga a exception
+        } finally {
+            pstmt.close();
+            con.close();
+        }
+    }
+
 
 
     public boolean Existe(String login) {

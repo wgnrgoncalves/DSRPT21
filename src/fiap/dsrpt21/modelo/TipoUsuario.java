@@ -1,8 +1,8 @@
 package fiap.dsrpt21.modelo;
 
 public enum TipoUsuario {
-	Administrador("Administrador do Sistema"),
-	Comum("Usuario Comum");
+	ADMINISTRADOR("Administrador do Sistema"),
+	COMUM("Usuario Comum");
 	
 	private TipoUsuario(String nome) {
 		this.nome = nome;

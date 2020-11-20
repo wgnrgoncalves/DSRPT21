@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fiap.dsrpt21.modelo.TipoUsuario;
 import fiap.dsrpt21.modelo.Usuario;
 import fiap.dsrpt21.negocio.UsuarioBO;
 //import fiap.nac2.modelo.TipoFuncionario;
@@ -37,19 +38,26 @@ public class loginController extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
-        //doGet(request, response);
         String login = request.getParameter("email");
         String senha = request.getParameter("senha");
-        //Instancia o Business Object (BO)
         UsuarioBO negocio = new UsuarioBO();
-        boolean hasPermission;
+        Usuario user;
         try {
+            user = negocio.login(login, senha);
 
-            hasPermission = negocio.login(login, senha);
-            if (hasPermission) {
+            TipoUsuario userRole = user.getTp_usuario();
+            String userName = user.getNm_usuario();
+
+            if (userName != null) {
+                if (userRole == TipoUsuario.ADMINISTRADOR) {
+                    request.getSession().setAttribute("usuarioLogado", true);
+                    request.getSession().setAttribute("role", "Administrador");
+                    request.getRequestDispatcher("/views/admin/index.jsp").forward(request, response);
+                    return;
+                }
                 request.getSession().setAttribute("usuarioLogado", true);
-                request.getRequestDispatcher("/views/index.jsp").forward(request, response);
+                request.getSession().setAttribute("role", "Cliente");
+                request.getRequestDispatcher("/views/client/index.jsp").forward(request, response);
             }else
             {
                 request.setAttribute("erro", "Login ou senha inválido!");
@@ -59,7 +67,7 @@ public class loginController extends HttpServlet {
         }
         catch (Exception e) {
             request.setAttribute("erro", e.getMessage());
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
         }
     }
 

@@ -7,10 +7,10 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>DSRPT21 - Home</title>
-<%@include file="../partial/estilos.txt"%>
+<%@include file="../../partial/estilos.txt"%>
 </head>
 <body>
-	<%@include file="../partial/header.txt"%>
+	<%@include file="../../partial/client/header.txt"%>
 <div class="container" style="padding-top: 40px;">
 	<h2>DSRPT21</h2>
 	<h3>Bem vindo ao DSRPT21</h3>
@@ -53,7 +53,7 @@
     
   </tbody>
 </table>
-	<%@include file="../partial/footer.txt"%>
+	<%@include file="../../partial/footer.txt"%>
     </div>
 </body>
 </html>
